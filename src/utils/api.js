@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const token = getToken();
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `${token}`;
     }
     return config;
   },
@@ -37,9 +37,9 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export const apiCall = async (method, url, data = null) => {
+export const apiCall = async (method, url, data = null, params = null) => {
   try {
-    const response = await axiosInstance({ method, url, data });
+    const response = await axiosInstance({ method, url, data, params });
     return { success: true, data: response.data };
   } catch (error) {
     return {
