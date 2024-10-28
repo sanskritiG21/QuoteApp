@@ -5,5 +5,5 @@ export const login = (data) => {
 };
 
 export const getAllQuotes = (data, params) => {
-  return apiCall("GET", "/getQuotes?limit=20&offset=0", data, params);
+  return apiCall("GET", "/getQuotes", data, params);
 };

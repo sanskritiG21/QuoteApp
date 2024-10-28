@@ -5,7 +5,7 @@ const FloatingPill = () => {
 
   return (
     <div
-      className={`fixed bottom-0 right-0 m-10 bg-purple-500 h-10 w-10 rounded-full text-white flex items-center justify-center cursor-pointer transition-all duration-300 ${
+      className={`fixed bottom-0 right-0 m-10 bg-purple-500 h-10 w-10 rounded-full text-white flex items-center justify-center cursor-pointer transition-all duration-300  ${
         isHovered ? "w-40" : "w-10"
       }`}
       onMouseEnter={() => setIsHovered(true)}

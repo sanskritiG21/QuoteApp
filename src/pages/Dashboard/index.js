@@ -2,18 +2,26 @@ import QuoteCard from "./QuoteCard";
 import FloatingPill from "../../components/FloatingPill";
 import ShimmerMain from "../../components/ShimmerMain";
 import { getAllQuotes } from "../../utils/appApi";
-import { useCallback, useEffect } from "react";
-import { apiCall } from "../../utils/api";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
+  const [quotesData, setQuotesData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [offset, setOffset] = useState(0);
+
   const getQuotes = () => {
+    setLoading(true);
     const params = {
       limit: 20,
-      offset: 0,
+      offset: offset,
     };
-    apiCall("GET", "/getQuotes", null, params).then((res) => {
-      console.log(res);
-    });
+    getAllQuotes(null, params)
+      .then(({ data: { data: cardsData } }) => {
+        setQuotesData(cardsData);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -28,12 +36,13 @@ const Dashboard = () => {
           <button className="text-3xl">👤</button>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-6 mt-8">
-          {Array(20)
-            .fill()
-            .map((index) => (
-              <QuoteCard key={index} />
-            ))}
-          <ShimmerMain />
+          {!loading ? (
+            quotesData.map((data, index) => (
+              <QuoteCard key={index} data={data} />
+            ))
+          ) : (
+            <ShimmerMain />
+          )}
         </div>
       </div>
       <FloatingPill />

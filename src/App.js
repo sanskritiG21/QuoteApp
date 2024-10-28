@@ -13,7 +13,10 @@ function App() {
       {/* todo: remove this div and place it on each screen */}
       <div className="min-h-screen bg-gradient-to-b from-blue-950 via-purple-800 to-gray-950 text-white">
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={isAuthenticated() ? <Navigate to="/app" /> : <Login />}
+          />
           <Route
             path="/app"
             element={
