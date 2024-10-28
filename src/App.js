@@ -10,27 +10,24 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   return (
     <BrowserRouter>
-      {/* todo: remove this div and place it on each screen */}
-      <div className="min-h-screen bg-gradient-to-b from-blue-950 via-purple-800 to-gray-950 text-white">
-        <Routes>
-          <Route
-            path="/login"
-            element={isAuthenticated() ? <Navigate to="/app" /> : <Login />}
-          />
-          <Route
-            path="/app"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="*"
-            element={<Navigate to={isAuthenticated() ? "/app" : "/login"} />}
-          />
-        </Routes>
-      </div>
+      <Routes>
+        <Route
+          path="/login"
+          element={isAuthenticated() ? <Navigate to="/app" /> : <Login />}
+        />
+        <Route
+          path="/app"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="*"
+          element={<Navigate to={isAuthenticated() ? "/app" : "/login"} />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
