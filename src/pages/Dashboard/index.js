@@ -62,7 +62,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className=" bg-gradient-to-b from-blue-950 via-purple-800 to-gray-950 text-white">
+    <div className="bg-gradient-to-b from-blue-950 via-purple-900 to-gray-950 text-white">
       <div className="container m-auto">
         <div className="p-5 ">
           <div className="flex justify-between md:mx-10 lg:mx-14">
