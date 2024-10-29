@@ -1,16 +1,18 @@
 import QuoteCard from "./QuoteCard";
 import ShimmerMain from "../../components/ShimmerMain";
 import { getAllQuotes } from "../../utils/appApi";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { removeToken } from "../../utils/localstorage";
 import { useNavigate } from "react-router-dom";
 import CreateQuote from "../CreateQuote";
 
+const LIMIT = 20;
+
 const Dashboard = () => {
   const [quotesData, setQuotesData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [offset, setOffset] = useState(740);
   const [hasMore, setHasMore] = useState(true);
+  const offsetRef = useRef(0);
 
   const navigate = useNavigate();
 
@@ -19,38 +21,37 @@ const Dashboard = () => {
     removeToken("token");
   };
 
-  const getQuotes = () => {
+  const getQuotes = useCallback(() => {
     if (loading || !hasMore) return;
 
     setLoading(true);
-    console.log(offset);
 
     const params = {
-      limit: 20,
-      offset: offset,
+      limit: LIMIT,
+      offset: offsetRef.current,
     };
 
     getAllQuotes(null, params)
       .then(({ data: { data: cardsData } }) => {
-        if (cardsData.length < 20) {
+        if (cardsData.length < LIMIT) {
           setHasMore(false);
         }
         setQuotesData((prevData) => [...prevData, ...cardsData]);
-        setOffset((prevOffset) => {
-          console.log(prevOffset, "pre");
-          return prevOffset + 20;
-        });
       })
       .finally(() => {
         setLoading(false);
       });
-  };
+    offsetRef.current += LIMIT;
+  }, [offsetRef]);
 
-  const handleScroll = () => {
-    if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+  const handleScroll = useCallback(() => {
+    if (
+      window.scrollY + window.innerHeight >=
+      document.body.scrollHeight - 100
+    ) {
       getQuotes();
     }
-  };
+  }, [offsetRef]);
 
   // InfiniteScroll
   useEffect(() => {
