@@ -5,28 +5,27 @@ import Login from "./pages/Login";
 import { isAuthenticated } from "./utils/auth";
 
 const ProtectedRoute = ({ children }) => {
-  const [authStatus, setAuthStatus] = useState(null); // Store authentication status
+  const [authStatus, setAuthStatus] = useState(null);
 
   useEffect(() => {
     const status = isAuthenticated();
-    setAuthStatus(status); // Set authentication status once
+    setAuthStatus(status);
   }, []);
 
-  // Avoid rendering until auth status is determined
   if (authStatus === null) return <div>Loading...</div>;
 
   return authStatus ? children : <Navigate to="/login" replace />;
 };
 
 function App() {
-  const [isAuth, setIsAuth] = useState(null); // Cache authentication status
+  const [isAuth, setIsAuth] = useState(null);
 
   useEffect(() => {
     const status = isAuthenticated();
     setIsAuth(status);
   }, []);
 
-  if (isAuth === null) return <div>Loading...</div>; // Avoid rendering routes prematurely
+  if (isAuth === null) return <div>Loading...</div>;
 
   return (
     <BrowserRouter>
