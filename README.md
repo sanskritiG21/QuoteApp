@@ -2,8 +2,10 @@
 
 #### run this app in development mode
 
-`npm start`
+<!-- to installl all the development dependency -->
 
-#### run this app in development mode
+`npm install`
+
+<!-- to start development server -->
 
 `npm start`
