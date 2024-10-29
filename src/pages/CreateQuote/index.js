@@ -123,13 +123,13 @@ const CreateQuote = () => {
           <div className="flex items-center justify-center">
             <button
               className={`${
-                quote && image
-                  ? "bg-purple-500 shadow-lg "
+                quote && image && !loading
+                  ? "bg-purple-500 shadow-lg focus:bg-purple-600 duration-150"
                   : " bg-slate-500/20 text-black/50"
               } p-2 w-full  rounded-lg `}
               disabled={(!quote && !image) || loading}
               onClick={handleCreateQuote}>
-              submit
+              Submit
             </button>
           </div>
         </div>
