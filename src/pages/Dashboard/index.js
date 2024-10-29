@@ -3,8 +3,6 @@ import QuoteCard from "./QuoteCard";
 import ShimmerMain from "../../components/ShimmerMain";
 import { getAllQuotes } from "../../utils/appApi";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { removeToken } from "../../utils/localstorage";
-import { useNavigate } from "react-router-dom";
 import CreateQuote from "../CreateQuote";
 import { CALLED_BY } from "../../utils/constant";
 
@@ -16,13 +14,6 @@ const Dashboard = () => {
   const [hasMore, setHasMore] = useState(true);
 
   const offsetRef = useRef(0);
-
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    removeToken("token");
-    navigate("/login", { replace: true });
-  };
 
   const getQuotes = useCallback(
     (calledBy) => {
@@ -79,9 +70,6 @@ const Dashboard = () => {
         <div className="p-5 ">
           <div className="header">
             <div className="text-5xl">Quote</div>
-            <button className="logout-btn" onClick={handleLogout}>
-              logout
-            </button>
           </div>
           <div className="cards-container">
             {quotesData.map((data = {}, index) => (
