@@ -13,13 +13,15 @@ const Dashboard = () => {
   const [quotesData, setQuotesData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const offsetRef = useRef(0);
+  const offsetRef = useRef(750);
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate("/login");
     removeToken("token");
+    setTimeout(() => {
+      navigate("/login");
+    }, 100);
   };
 
   const getQuotes = useCallback(() => {
@@ -38,14 +40,16 @@ const Dashboard = () => {
           setHasMore(false);
         }
         setQuotesData((prevData) => [...prevData, ...cardsData]);
+        offsetRef.current += LIMIT;
       })
       .finally(() => {
         setLoading(false);
       });
-    offsetRef.current += LIMIT;
   }, [offsetRef]);
 
   const handleScroll = useCallback(() => {
+    if (!hasMore || loading) return;
+
     if (
       window.scrollY + window.innerHeight >=
       document.body.scrollHeight - 100

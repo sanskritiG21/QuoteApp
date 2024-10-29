@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.modal-title {
+  @apply text-2xl font-semibold mb-4 text-gray-800;
+}
+
+.input-label {
+  @apply block text-sm font-medium mb-2
+    block text-sm font-medium mb-2;
+}
+
+.upload-file-input {
+  @apply block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none;
+}
+
+.quote-textarea {
+  @apply w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+.preview-title {
+  @apply text-sm font-semibold mb-2;
+}

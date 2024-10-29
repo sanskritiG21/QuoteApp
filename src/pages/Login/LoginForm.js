@@ -8,13 +8,18 @@ const LoginForm = () => {
     username: null,
     otp: null,
   });
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    login(loginInfo).then(({ data: { token } }) => {
-      setToken(token);
-      navigate("/app");
+    login(loginInfo).then((res) => {
+      if (!res.error) {
+        setToken(res?.data?.token);
+        navigate("/app");
+      } else {
+        setError(true);
+      }
     });
   };
 
@@ -22,6 +27,12 @@ const LoginForm = () => {
     <div className="login-form-main">
       <div className="login-form-container">
         <h1 className="login-heading">Login</h1>
+        {error && (
+          <div className="invalid-creds">
+            <p>Invalid credentials</p>
+            <button onClick={() => setError(false)}>&#10005;</button>
+          </div>
+        )}
         <div className="mb-4">
           <label className="label-text">Username</label>
           <input
