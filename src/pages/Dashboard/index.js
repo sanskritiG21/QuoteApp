@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { removeToken } from "../../utils/localstorage";
 import { useNavigate } from "react-router-dom";
 import CreateQuote from "../CreateQuote";
+import { CALLED_BY } from "../../utils/constant";
 
 const LIMIT = 20;
 
@@ -13,18 +14,17 @@ const Dashboard = () => {
   const [quotesData, setQuotesData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const offsetRef = useRef(750);
+
+  const offsetRef = useRef(0);
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    removeToken("token");
-    setTimeout(() => {
-      navigate("/login");
-    }, 100);
+  const handleLogout = async () => {
+    await removeToken("token");
+    navigate("/login");
   };
 
-  const getQuotes = useCallback(() => {
+  const getQuotes = (calledBy) => {
     if (loading || !hasMore) return;
 
     setLoading(true);
@@ -35,37 +35,41 @@ const Dashboard = () => {
     };
 
     getAllQuotes(null, params)
-      .then(({ data: { data: cardsData } }) => {
-        if (cardsData.length < LIMIT) {
-          setHasMore(false);
+      .then(({ data: { data: cardsData }, error }) => {
+        if (!error) {
+          if (cardsData.length < LIMIT) {
+            setHasMore(false);
+          }
+          setQuotesData((prevData) => [...prevData, ...cardsData]);
         }
-        setQuotesData((prevData) => [...prevData, ...cardsData]);
-        offsetRef.current += LIMIT;
+        if (calledBy === CALLED_BY.FUNCTION) {
+          offsetRef.current += LIMIT;
+        }
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [offsetRef]);
+  };
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = () => {
     if (!hasMore || loading) return;
 
-    if (
-      window.scrollY + window.innerHeight >=
-      document.body.scrollHeight - 100
-    ) {
-      getQuotes();
+    const isBottomReached =
+      window.scrollY + window.innerHeight === document.body.scrollHeight;
+
+    if (isBottomReached) {
+      getQuotes(CALLED_BY.FUNCTION);
     }
-  }, [offsetRef]);
+  };
 
   // InfiniteScroll
   useEffect(() => {
-    getQuotes();
+    getQuotes(CALLED_BY.HOOK);
 
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [hasMore]);
 
   return (
     <div className="dashboard-container">
@@ -78,7 +82,7 @@ const Dashboard = () => {
             </button>
           </div>
           <div className="cards-container">
-            {quotesData.map((data, index) => (
+            {quotesData.map((data = {}, index) => (
               <QuoteCard key={index} data={data} />
             ))}
             {loading && <ShimmerMain />}
