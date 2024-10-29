@@ -62,7 +62,7 @@ const CreateQuote = () => {
       .finally(() => {
         setTimeout(() => {
           handleCloseModal();
-        }, 1000);
+        }, 1500);
       });
   };
 
