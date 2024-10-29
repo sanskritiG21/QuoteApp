@@ -13,6 +13,7 @@ const CreateQuote = () => {
   const [notification, setNotification] = useState({
     message: null,
     showMessage: false,
+    type: null,
   });
 
   const handleImageUpload = (e) => {
@@ -42,10 +43,20 @@ const CreateQuote = () => {
         };
         return createNewQuote(params);
       })
-      .then(() => {
+      .then((res) => {
+        if (res) {
+        }
         setNotification({
           message: "Quotes created successfully",
           showMessage: true,
+          type: "success",
+        });
+      })
+      .catch((err) => {
+        setNotification({
+          message: "Something went wrong",
+          showMessage: true,
+          type: "error",
         });
       })
       .finally(() => {
@@ -73,7 +84,10 @@ const CreateQuote = () => {
         <div className="modal-title">Create Your Own Quote</div>
         <div className="max-w-lg mx-auto p-6 bg-gray-500/10 rounded-lg shadow-md">
           {notification.showMessage && (
-            <div className="notification">
+            <div
+              className={`notification ${
+                notification.type === "error" ? "bg-red-400" : "bg-green-400"
+              } `}>
               {notification.message}
               <button
                 onClick={() => {
@@ -129,7 +143,7 @@ const CreateQuote = () => {
               } p-2 w-full  rounded-lg `}
               disabled={(!quote && !image) || loading}
               onClick={handleCreateQuote}>
-              Submit
+              {loading ? "Submitting..." : "Submit"}
             </button>
           </div>
         </div>

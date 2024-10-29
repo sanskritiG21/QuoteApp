@@ -24,7 +24,7 @@
 }
 
 .notification {
-  @apply bg-green-400 p-2 mb-2 rounded-lg flex justify-between;
+  @apply p-2 mb-2 rounded-lg flex justify-between;
 }
 .preview-wrapper {
   @apply relative bg-white border rounded-lg shadow-lg;
