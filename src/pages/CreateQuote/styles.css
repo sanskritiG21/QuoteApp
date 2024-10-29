@@ -35,5 +35,5 @@
 }
 
 .preview-text-wrapper {
-  @apply absolute inset-0 border flex justify-center items-center bg-black/65 text-center text-lg font-semibold text-white rounded-lg;
+  @apply absolute inset-0 border flex justify-center items-center bg-black/65 text-center text-lg font-semibold text-white rounded-lg break-words whitespace-pre-wrap overflow-hidden p-4;
 }

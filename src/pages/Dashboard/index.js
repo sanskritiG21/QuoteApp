@@ -51,7 +51,7 @@ const Dashboard = () => {
           setLoading(false);
         });
     },
-    [hasMore]
+    [hasMore, loading]
   );
 
   const handleScroll = useCallback(() => {
@@ -63,7 +63,7 @@ const Dashboard = () => {
     if (isBottomReached) {
       getQuotes(CALLED_BY.FUNCTION);
     }
-  }, [hasMore]);
+  }, [hasMore, loading, getQuotes]);
 
   useEffect(() => {
     getQuotes(CALLED_BY.HOOK);
@@ -71,7 +71,7 @@ const Dashboard = () => {
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [hasMore]);
 
   return (
     <div className="dashboard-container">
