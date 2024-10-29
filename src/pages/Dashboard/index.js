@@ -20,38 +20,41 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await removeToken("token");
-    navigate("/login");
+    removeToken("token");
+    navigate("/login", { replace: true });
   };
 
-  const getQuotes = (calledBy) => {
-    if (loading || !hasMore) return;
+  const getQuotes = useCallback(
+    (calledBy) => {
+      if (loading || !hasMore) return;
 
-    setLoading(true);
+      setLoading(true);
 
-    const params = {
-      limit: LIMIT,
-      offset: offsetRef.current,
-    };
+      const params = {
+        limit: LIMIT,
+        offset: offsetRef.current,
+      };
 
-    getAllQuotes(null, params)
-      .then(({ data: { data: cardsData }, error }) => {
-        if (!error) {
-          if (cardsData.length < LIMIT) {
-            setHasMore(false);
+      getAllQuotes(null, params)
+        .then(({ data: { data: cardsData }, error }) => {
+          if (!error) {
+            if (cardsData.length < LIMIT) {
+              setHasMore(false);
+            }
+            setQuotesData((prevData) => [...prevData, ...cardsData]);
           }
-          setQuotesData((prevData) => [...prevData, ...cardsData]);
-        }
-        if (calledBy === CALLED_BY.FUNCTION) {
-          offsetRef.current += LIMIT;
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+          if (calledBy === CALLED_BY.FUNCTION) {
+            offsetRef.current += LIMIT;
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    },
+    [hasMore]
+  );
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (!hasMore || loading) return;
 
     const isBottomReached =
@@ -60,16 +63,15 @@ const Dashboard = () => {
     if (isBottomReached) {
       getQuotes(CALLED_BY.FUNCTION);
     }
-  };
+  }, [hasMore]);
 
-  // InfiniteScroll
   useEffect(() => {
     getQuotes(CALLED_BY.HOOK);
 
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasMore]);
+  }, []);
 
   return (
     <div className="dashboard-container">

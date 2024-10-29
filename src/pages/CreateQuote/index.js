@@ -73,7 +73,7 @@ const CreateQuote = () => {
         <div className="modal-title">Create Your Own Quote</div>
         <div className="max-w-lg mx-auto p-6 bg-gray-500/10 rounded-lg shadow-md">
           {notification.showMessage && (
-            <div className="bg-green-400 p-2 mb-2 rounded-lg flex justify-between">
+            <div className="notification">
               {notification.message}
               <button
                 onClick={() => {
@@ -111,20 +111,16 @@ const CreateQuote = () => {
             {image && (
               <div className="mb-4">
                 <div className="preview-title">Preview</div>
-                <div className="relative bg-white border rounded-lg shadow-lg">
-                  <img
-                    src={image}
-                    alt="Uploaded"
-                    className="w-full h-64 object-cover rounded-lg"
-                  />
-                  <div className="absolute inset-0 border flex justify-center items-center bg-black/65 text-center text-lg font-semibold text-white rounded-lg">
+                <div className="preview-wrapper">
+                  <img src={image} alt="Uploaded" className="preview-image" />
+                  <div className="preview-text-wrapper">
                     {quote || "Your quote will appear here!"}
                   </div>
                 </div>
               </div>
             )}
           </div>
-          <div className="flex align-center justify-center">
+          <div className="flex items-center justify-center">
             <button
               className={`${
                 quote && image

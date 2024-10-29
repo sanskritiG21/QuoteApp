@@ -22,3 +22,18 @@
 .preview-title {
   @apply text-sm font-semibold mb-2;
 }
+
+.notification {
+  @apply bg-green-400 p-2 mb-2 rounded-lg flex justify-between;
+}
+.preview-wrapper {
+  @apply relative bg-white border rounded-lg shadow-lg;
+}
+
+.preview-image {
+  @apply w-full h-64 object-cover rounded-lg;
+}
+
+.preview-text-wrapper {
+  @apply absolute inset-0 border flex justify-center items-center bg-black/65 text-center text-lg font-semibold text-white rounded-lg;
+}
