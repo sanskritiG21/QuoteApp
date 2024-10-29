@@ -1,3 +1,4 @@
+import "./styles.css";
 import QuoteCard from "./QuoteCard";
 import ShimmerMain from "../../components/ShimmerMain";
 import { getAllQuotes } from "../../utils/appApi";
@@ -63,18 +64,16 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-blue-950 via-purple-900 to-gray-950 text-white">
+    <div className="dashboard-container">
       <div className="container m-auto">
         <div className="p-5 ">
-          <div className="flex justify-between md:mx-10 lg:mx-14">
+          <div className="header">
             <div className="text-5xl">Quote</div>
-            <button
-              className="p-2 px-10 bg-slate-900/50 rounded-3xl hover:bg-purple-900/50 shadow-lg shadow-black/20"
-              onClick={handleLogout}>
+            <button className="logout-btn" onClick={handleLogout}>
               logout
             </button>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 mt-8">
+          <div className="cards-container">
             {quotesData.map((data, index) => (
               <QuoteCard key={index} data={data} />
             ))}

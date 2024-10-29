@@ -1,11 +1,10 @@
-import React from "react";
 import LoginVector from "../../assets/Mobile login-amico.png";
 import LoginForm from "./LoginForm";
 
 const LoginCard = () => {
   return (
-    <div className="bg-gray-400/20 rounded-xl lg:h-[80vh] p-5 md:mx-5 lg:mx-10 text-white flex items-center">
-      <div className="lg:flex lg:items-center ">
+    <div className="login-card-container">
+      <div className="login-card-sub-container-lg">
         <div className="container">
           <img
             src={LoginVector}

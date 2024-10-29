@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const FloatingPill = ({ openModal, setOpenModal }) => {
   const [isHovered, setIsHovered] = useState(false);

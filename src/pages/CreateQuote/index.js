@@ -13,8 +13,8 @@ const CreateQuote = () => {
   const handleImageUpload = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      setImage(URL.createObjectURL(selectedFile)); // For preview
-      setFile(selectedFile); // Store file for upload
+      setImage(URL.createObjectURL(selectedFile));
+      setFile(selectedFile);
     }
   };
 
@@ -25,7 +25,7 @@ const CreateQuote = () => {
   const handleCreateQuote = () => {
     if (!file || !quote) return;
 
-    // setLoading(true);
+    setLoading(true);
     const formData = new FormData();
     formData.append("file", file);
 

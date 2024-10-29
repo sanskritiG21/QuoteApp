@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.login-container {
+  @apply container py-8 md:py-20 m-auto flex justify-center items-center;
+}
+.login-card-container {
+  @apply bg-gray-400/20 rounded-xl lg:h-[80vh] p-5 md:mx-5 lg:mx-10 text-white flex items-center;
+}
+
+.login-card-sub-container-lg {
+  @apply lg:flex lg:items-center;
+}
+
+.login-form-main {
+  @apply login-container flex items-center justify-center h-full w-full p-4;
+}
+
+@layer components {
+  .login-form-container {
+    @apply w-full max-w-md p-6 rounded-xl bg-gray-800/30 shadow-lg shadow-gray-950/20;
+  }
+}
+
+.login-heading {
+  @apply text-center text-5xl mb-6;
+}
+
+.label-text {
+  @apply text-sm block mb-1;
+}
+
+.login-input {
+  @apply w-full p-2 border border-gray-900/20 rounded-lg bg-slate-800/20 text-white text-base;
+}
+
+.horizontal-center {
+  @apply flex justify-center;
+}
+
+.login-btn {
+  @apply text-base mt-4 p-2 px-10 bg-[#9553A0] hover:bg-purple-600 rounded-lg text-white shadow-lg shadow-gray-950/20;
+}

@@ -8,3 +8,13 @@ html {
   font-family: "Open Sans", sans-serif;
   letter-spacing: 0.05em;
 }
+
+@layer base {
+  .dashboard-container {
+    @apply min-h-screen bg-gradient-to-b from-blue-950 via-purple-900 to-gray-950/100 text-white;
+  }
+
+  .shimmer {
+    @apply bg-slate-200/20 h-80 w-80 m-2 rounded-lg p-4 hover:scale-105 duration-150;
+  }
+}

@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .logout-btn {
+    @apply p-2 px-10 bg-slate-900/50 rounded-3xl hover:bg-purple-900/50 shadow-lg shadow-black/20;
+  }
+}
+
+.cards-container {
+  @apply flex flex-wrap items-center justify-center gap-6 mt-8;
+}
+
+.header {
+  @apply flex justify-between md:mx-10 lg:mx-14;
+}
+
+.card-main {
+  @apply relative bg-slate-200/20 h-80 w-80 m-2 rounded-lg  hover:scale-105 duration-150 flex items-center justify-center text-white shadow-2xl;
+}
+
+.card-layover {
+  @apply absolute inset-0 bg-black opacity-40 rounded-lg;
+}
+
+.quote-layout {
+  @apply bg-black/30 h-full w-full rounded-lg flex justify-center items-center;
+}
+
+.truncated-text {
+  @apply text-center text-2xl text-white p-2 rounded z-10;
+}
+
+.creator-info {
+  @apply text-xs absolute bottom-0 right-0 m-2;
+}

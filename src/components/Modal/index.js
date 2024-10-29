@@ -1,5 +1,4 @@
-// src/components/Modal.js
-
+import "./styles.css";
 import { useEffect } from "react";
 
 const Modal = ({ isOpen, onClose, children }) => {
@@ -21,18 +20,11 @@ const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
-    // Backdrop
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div
-        className="fixed inset-0 bg-black opacity-50"
-        onClick={onClose}></div>
-
-      {/* Modal container */}
-      <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full z-10 transition-transform transform scale-100">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
-          &#10005; {/* X close button */}
+    <div className="modal-backdrop">
+      <div className="modal-bg-overlay" onClick={onClose}></div>
+      <div className="modal-container">
+        <button onClick={onClose} className="close-btn">
+          &#10005;
         </button>
 
         {/* Modal content */}
