@@ -16,8 +16,8 @@ const QuoteCard = ({ data }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       <div className="absolute inset-0 bg-black opacity-40 rounded-lg"></div>
-      <div className="bg-black/50 h-full w-full rounded-lg z-2 flex justify-center items-center">
-        <div className="text-center text-2xl text-white p-2 rounded">
+      <div className="bg-black/30 h-full w-full rounded-lg z-2 flex justify-center items-center">
+        <div className="text-center text-2xl text-white p-2 rounded z-10">
           {getTruncatedText(text)}
         </div>
         {isHovered && (

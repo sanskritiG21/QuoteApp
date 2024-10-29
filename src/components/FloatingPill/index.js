@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FloatingPill = () => {
+const FloatingPill = ({ openModal, setOpenModal }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -9,7 +9,8 @@ const FloatingPill = () => {
         isHovered ? "w-40" : "w-10"
       }`}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}>
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => setOpenModal(true)}>
       {isHovered ? "Create Quote" : "+"}
     </div>
   );

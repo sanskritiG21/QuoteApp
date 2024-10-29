@@ -1,15 +1,15 @@
 import QuoteCard from "./QuoteCard";
-import FloatingPill from "../../components/FloatingPill";
 import ShimmerMain from "../../components/ShimmerMain";
 import { getAllQuotes } from "../../utils/appApi";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { removeToken } from "../../utils/localstorage";
 import { useNavigate } from "react-router-dom";
+import CreateQuote from "../CreateQuote";
 
 const Dashboard = () => {
   const [quotesData, setQuotesData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(740);
   const [hasMore, setHasMore] = useState(true);
 
   const navigate = useNavigate();
@@ -80,7 +80,7 @@ const Dashboard = () => {
             {loading && <ShimmerMain />}
           </div>
         </div>
-        <FloatingPill />
+        <CreateQuote />
       </div>
     </div>
   );

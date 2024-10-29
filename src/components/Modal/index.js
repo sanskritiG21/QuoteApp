@@ -18,15 +18,14 @@ const Modal = ({ isOpen, onClose, children }) => {
     return () => document.removeEventListener("keydown", handleEsc);
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null; // Don't render the modal if it's not open
+  if (!isOpen) return null;
 
   return (
     // Backdrop
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div
         className="fixed inset-0 bg-black opacity-50"
-        onClick={onClose} // Close when clicking the backdrop
-      ></div>
+        onClick={onClose}></div>
 
       {/* Modal container */}
       <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full z-10 transition-transform transform scale-100">
